@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>LLM Form Filler Options</title>
+    <style>
+      body {
+        width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      }
+      h1 {
+        font-size: 24px;
+        margin: 0 0 20px 0;
+        color: #333;
+      }
+      .input-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      button:hover {
+        background: #45a049;
+      }
+      #status {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 4px;
+        display: none;
+      }
+      .success {
+        background: #e8f5e9;
+        color: #2e7d32;
+        border: 1px solid #c8e6c9;
+      }
+      .error {
+        background: #ffebee;
+        color: #c62828;
+        border: 1px solid #ffcdd2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>LLM Form Filler - Options</h1>
+    <div class="input-group">
+      <label for="apiKey">OpenAI API Key:</label>
+      <input type="text" id="apiKey" placeholder="sk-... your secret key" />
+      <div style="margin-top: 8px; font-size: 13px; color: #666;">
+        Get your API key from <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI's website</a>
+      </div>
+    </div>
+    <button id="saveKey">Save API Key</button>
+    <div id="status"></div>
+
+    <script src="options.js"></script>
+  </body>
+</html> 

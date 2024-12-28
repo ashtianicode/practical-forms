@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Practical Forms</title>
+    <style>
+      body {
+        width: 350px;
+        padding: 15px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        background: #F5F5F1;
+        color: rgb(134,58,74);
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0 0 15px 0;
+        color: rgb(134,58,74);
+      }
+      .info {
+        font-size: 14px;
+        color: rgb(134,58,74);
+        margin-bottom: 15px;
+        line-height: 1.4;
+      }
+      button {
+        background: rgb(134,58,74);
+        color: #F5F5F1;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        width: 100%;
+        font-weight: bold;
+      }
+      button:hover {
+        opacity: 0.9;
+      }
+      .status {
+        font-size: 13px;
+        color: rgb(134,58,74);
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgb(134,58,74);
+      }
+      .api-status {
+        padding: 8px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        display: none;
+      }
+      .api-status.verified {
+        background: rgb(134,58,74);
+        color: #F5F5F1;
+        border: none;
+      }
+      .api-status.missing {
+        background: #FFF0F0;
+        color: rgb(134,58,74);
+        border: 1px solid #FFD0D0;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .saved-info {
+        margin: 15px 0;
+        padding: 10px;
+        background: #FFFFFF;
+        border: 1px solid rgb(134,58,74);
+        border-radius: 4px;
+      }
+      .saved-info h2 {
+        font-size: 14px;
+        margin: 0 0 10px 0;
+        color: rgb(134,58,74);
+      }
+      .info-item {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        background: #FFFFFF;
+        border: 1px solid rgba(134,58,74,0.2);
+        margin-bottom: 8px;
+        border-radius: 4px;
+        font-size: 13px;
+        box-shadow: 0 2px 4px rgba(134,58,74,0.1);
+        transition: all 0.2s ease;
+      }
+      .info-item:hover {
+        box-shadow: 0 4px 8px rgba(134,58,74,0.15);
+        transform: translateY(-1px);
+      }
+      .info-label {
+        color: rgb(134,58,74);
+        font-weight: 500;
+        margin-right: 8px;
+      }
+      .info-value-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+      }
+      .info-value {
+        color: rgb(134,58,74);
+        font-weight: 600;
+        padding: 4px 8px;
+        background: rgba(134,58,74,0.05);
+        border: 1px solid transparent;
+        border-radius: 3px;
+        flex: 1;
+      }
+      .info-value:focus {
+        outline: none;
+        border-color: rgb(134,58,74);
+        background: #FFFFFF;
+      }
+      .no-info {
+        color: rgb(134,58,74);
+        font-style: italic;
+        text-align: center;
+        padding: 10px;
+      }
+      /* Toggle switch styles */
+      .toggle-container {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+        padding: 10px;
+        background: #FFFFFF;
+        border: 1px solid rgb(134,58,74);
+        border-radius: 4px;
+      }
+      .toggle-label {
+        flex-grow: 1;
+        font-size: 14px;
+        color: rgb(134,58,74);
+      }
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 44px;
+        height: 24px;
+      }
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 24px;
+      }
+      .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+      }
+      input:checked + .toggle-slider {
+        background-color: rgb(134,58,74);
+      }
+      input:checked + .toggle-slider:before {
+        transform: translateX(20px);
+      }
+      .buttons-container {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .action-button {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+      .action-button:active {
+        transform: scale(0.95);
+      }
+      .action-button.clicked {
+        animation: clickEffect 0.5s ease;
+      }
+      @keyframes clickEffect {
+        0% { transform: scale(0.95); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+      .copy-icon {
+        width: 16px;
+        height: 16px;
+      }
+      .api-container {
+        margin-bottom: 15px;
+      }
+      .api-status {
+        display: block;
+        background: #FFFFFF;
+        border: 1px solid rgb(134,58,74);
+        border-radius: 4px;
+        padding: 12px;
+        margin-bottom: 15px;
+      }
+      .api-input-group {
+        display: flex;
+        gap: 8px;
+      }
+      .api-input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid rgba(134,58,74,0.3);
+        border-radius: 4px;
+        font-size: 14px;
+        color: rgb(134,58,74);
+        background: #F5F5F1;
+        transition: all 0.2s ease;
+      }
+      .api-input:focus {
+        outline: none;
+        border-color: rgb(134,58,74);
+        background: #FFFFFF;
+      }
+      .api-button {
+        position: relative;
+        width: auto;
+        overflow: hidden;
+      }
+      .api-button .button-content,
+      .api-button .success-icon {
+        display: inline-block;
+        transition: all 0.3s ease;
+      }
+      .api-button .success-icon {
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%) scale(0);
+        opacity: 0;
+      }
+      .api-button.success .button-content {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .api-button.success .success-icon {
+        opacity: 1;
+        transform: translateX(50%) scale(1);
+      }
+      .api-message {
+        margin-top: 8px;
+        font-size: 13px;
+        color: rgb(134,58,74);
+        text-align: center;
+        min-height: 20px;
+      }
+      .verified .api-input-group {
+        display: none;
+      }
+      .verified .api-message {
+        color: #F5F5F1;
+        font-weight: 500;
+        margin-top: 0;
+      }
+      .info-value {
+        color: rgb(134,58,74);
+        font-weight: 500;
+        padding: 2px 6px;
+        border: 1px solid transparent;
+        border-radius: 3px;
+      }
+      .info-value-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .copy-value {
+        background: rgb(134,58,74);
+        color: #F5F5F1;
+        border: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        transition: all 0.2s ease;
+      }
+      .copy-value:hover {
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Practical Forms</h1>
+    
+    <div class="api-container">
+      <div id="apiStatus" class="api-status">
+        <div class="api-message"></div>
+      </div>
+      <div class="api-input-group">
+        <input type="password" id="apiKeyInput" class="api-input" placeholder="Enter OpenAI API Key">
+        <button id="saveApiKey" class="api-button">
+          <span class="button-content">Save</span>
+          <span class="success-icon">✓</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="saved-info">
+      <h2>📋 Your Saved Information</h2>
+      <div id="savedInfoList">
+        <div class="no-info">No information saved yet. Fill some forms to build your profile.</div>
+      </div>
+      <div class="buttons-container">
+        <button id="saveButton" class="action-button">
+          💾 Save Changes
+        </button>
+        <button id="copyButton" class="action-button">
+          📋 Copy All
+        </button>
+      </div>
+    </div>
+
+    <div class="toggle-container">
+      <span class="toggle-label">Show floating button</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="floatingButtonToggle" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="info">
+      Look for the button on web pages to start filling forms using AI.
+    </div>
+    <button id="openOptions" class="hidden">Configure API Key</button>
+    <div class="status" id="tipText">
+      Ready to fill forms! Click the floating button on any webpage to start.
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html> 

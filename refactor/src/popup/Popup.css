@@ -1,0 +1,266 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: #F5F5F1;
+  color: rgb(134,58,74);
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 18px;
+  margin: 0 0 15px 0;
+  color: rgb(134,58,74);
+}
+
+.popup-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.info {
+  font-size: 14px;
+  color: rgb(134,58,74);
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+button {
+  background: rgb(134,58,74);
+  color: #F5F5F1;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  font-weight: bold;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.api-container {
+  margin-bottom: 15px;
+}
+
+.api-status {
+  display: block;
+  background: #FFFFFF;
+  border: 1px solid rgb(134,58,74);
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+.api-status.verified {
+  background: rgb(134,58,74);
+  color: #F5F5F1;
+}
+
+.api-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.api-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid rgba(134,58,74,0.3);
+  border-radius: 4px;
+  font-size: 14px;
+  color: rgb(134,58,74);
+  background: #F5F5F1;
+  transition: all 0.2s ease;
+}
+
+.api-input:focus {
+  outline: none;
+  border-color: rgb(134,58,74);
+  background: #FFFFFF;
+}
+
+.api-message {
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgb(134,58,74);
+  text-align: center;
+  min-height: 20px;
+}
+
+.verified .api-input-group {
+  display: none;
+}
+
+.verified .api-message {
+  color: #F5F5F1;
+  font-weight: 500;
+  margin-top: 0;
+}
+
+.saved-info {
+  margin: 15px 0;
+  padding: 10px;
+  background: #FFFFFF;
+  border: 1px solid rgb(134,58,74);
+  border-radius: 4px;
+}
+
+.saved-info h2 {
+  font-size: 14px;
+  margin: 0 0 10px 0;
+  color: rgb(134,58,74);
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: #FFFFFF;
+  border: 1px solid rgba(134,58,74,0.2);
+  margin-bottom: 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  box-shadow: 0 2px 4px rgba(134,58,74,0.1);
+  transition: all 0.2s ease;
+}
+
+.info-item:hover {
+  box-shadow: 0 4px 8px rgba(134,58,74,0.15);
+  transform: translateY(-1px);
+}
+
+.info-label {
+  color: rgb(134,58,74);
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.info-value {
+  color: rgb(134,58,74);
+  font-weight: 500;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+
+.info-value-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copy-value {
+  background: rgb(134,58,74);
+  color: #F5F5F1;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.copy-value:hover {
+  opacity: 0.9;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.action-button {
+  flex: 1;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0;
+  padding: 10px;
+  background: #FFFFFF;
+  border: 1px solid rgb(134,58,74);
+  border-radius: 4px;
+}
+
+.toggle-label {
+  font-size: 14px;
+  color: rgb(134,58,74);
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 20px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: rgb(134,58,74);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+.no-info {
+  text-align: center;
+  color: rgb(134,58,74);
+  opacity: 0.7;
+  padding: 20px;
+  font-style: italic;
+}
+
+.status {
+  font-size: 13px;
+  color: rgb(134,58,74);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgb(134,58,74);
+}
+
+.hidden {
+  display: none !important;
+} 
